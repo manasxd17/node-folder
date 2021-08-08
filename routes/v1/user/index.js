@@ -5,4 +5,5 @@ module.exports = () => {
     routes.put('/:id', require('./updateUser')()),
     routes.post('/',require('./resgister')())
     return routes
+
 }
