@@ -75,7 +75,6 @@ const loginUser =  async (data) =>{
 
 
 
-
 module.exports = {
     getUserData,
     getParticular,

@@ -6,7 +6,6 @@ app.listen(process.env.port, () => {
     console.log("Listening!")
 })
 
-baseUrl = '/api/v1'
 const routeController = require('./routes/v1')()
 
 const userService = require('./services/users')
@@ -34,4 +33,4 @@ const userService = require('./services/users')
 // })
 
 app.use(bodyparser.json({extended: true}));
-app.use(baseUrl, routeController)
+app.use(routeController)
