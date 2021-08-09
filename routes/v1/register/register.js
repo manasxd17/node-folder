@@ -3,7 +3,7 @@ module.exports = () => {
     return (req,res) => {
         const data = req.body
         res.status(200).send({
-            "message":"User registered"
+            'data':userService.register(data)
         })
     }
 }

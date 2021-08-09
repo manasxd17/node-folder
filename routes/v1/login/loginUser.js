@@ -1,9 +1,10 @@
 const userService = require('../../../services/users')
 module.exports = () => {
-    return (req,res) => {
+    return async(req,res) => {
         const data = req.body
-        loginRes = userService.loginUser(data)
+        loginRes = await userService.loginUser(data)
         token = loginRes['token'] || null
+        console.log(loginRes['status'])
         res.status(loginRes['status']).send({
             "message": loginRes['message'],
             'token':token

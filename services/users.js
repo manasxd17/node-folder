@@ -1,16 +1,7 @@
 const JWT = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 require('dotenv').config()
-let users = [
-    {
-        "id":"1",
-        "name":"admin",
-        "email":"admin@gmail.com",
-        "password":"admin123",
-        "profilePicture":"xyz.jpeg"
-    }
-
-]
+let users = []
 
 const getUserData = () =>{
     return users
@@ -45,14 +36,18 @@ const register = async (data) => {
     data['password'] = hashedPassword
     users.push(data)
     console.log(users);
-    return "Data inserted" 
+    return "Data inserted"
 }
 
 
 const loginUser =  async (data) =>{
-    const userInfo =  await users.filter(user => user.email == data['email']);
+    const userInfo = await users.filter(user => user.email == data['email']);
     if(userInfo.length == 1){
-        if(await bcrypt.compare(userInfo[0]['password'],data['password'])){
+        const pass1 = userInfo[0]['password'];
+        const pass2 = data['password']
+        const check = bcrypt.compare(pass1,pass2)
+        if(check){
+            console.log(pass1,pass2)
             const token = JWT.sign(
                 {
                     "id":userInfo[0]['id'],
