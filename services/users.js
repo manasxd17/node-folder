@@ -43,9 +43,10 @@ const register = async (data) => {
 const loginUser =  async (data) =>{
     const userInfo = await users.filter(user => user.email == data['email']);
     if(userInfo.length == 1){
-        const pass1 = userInfo[0]['password'];
-        const pass2 = data['password']
-        const check = bcrypt.compare(pass1,pass2)
+        const pass2 = userInfo[0]['password'];
+        const pass1 = data['password']
+        const check = await bcrypt.compare(pass1,pass2)
+        console.log(check)
         if(check){
             console.log(pass1,pass2)
             const token = JWT.sign(
@@ -72,7 +73,6 @@ const loginUser =  async (data) =>{
     }
 }
 
-        
 
 
 

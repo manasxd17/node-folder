@@ -10,6 +10,7 @@ const verify_token = (req, res, next) => {
     try{
         jwtToken = token.split(' ')[1];
         const decoded = jwt.verify(jwtToken, process.env.jwt_secret);
+        req.user = decoded;
         userData = userService.getUserData(decoded['id'])
         if(userData.length == 0){
             return res.status(400).send({'message':'Unauthenticated'})
